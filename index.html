@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погодный Дашборд + Игра</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🌤️ Погодный Дашборд</h1>
+            <div class="controls">
+                <button class="btn btn-outline" id="toggleWidgetsBtn">
+                    📋 Доступные виджеты
+                </button>
+                <button class="btn btn-primary" id="addWidgetBtn">
+                    ➕ Добавить виджет
+                </button>
+                <button class="btn btn-outline" id="showGameBtn">
+                    🎮 Играть в игру
+                </button>
+                <button class="btn btn-outline" id="exportBtn">
+                    📤 Экспорт
+                </button>
+                <button class="btn btn-outline" id="importBtn">
+                    📥 Импорт
+                </button>
+            </div>
+        </header>
+
+        <section class="widgets-panel" id="widgetsPanel">
+            <h2>Доступные виджеты</h2>
+            <div class="available-widgets" id="availableWidgets">
+                <!-- Будет заполняться JavaScript -->
+            </div>
+            
+            <div class="export-import">
+                <h3>Создать свой виджет</h3>
+                <button class="btn btn-outline" id="createWidgetBtn">
+                    🆕 Создать новый виджет
+                </button>
+            </div>
+        </section>
+
+        <main class="dashboard" id="dashboard">
+            <!-- Виджеты будут добавляться сюда -->
+        </main>
+    </div>
+
+    <!-- Модальное окно игры -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 class="modal-title">☀️ Погодные пятнашки</h2>
+                <button class="close-btn" id="closeGame">&times;</button>
+            </div>
+            <div class="game-container">
+                <div class="game-info">
+                    <div class="score">Очки: <span id="score">0</span>/100</div>
+                    <div class="timer">Время: <span id="timer">00:00</span></div>
+                    <button class="btn btn-primary" id="startGame">Начать игру</button>
+                </div>
+                
+                <div class="game-grid" id="gameGrid">
+                    <!-- 9 карточек будут созданы через JavaScript -->
+                </div>
+                
+                <div class="game-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                
+                <div class="game-instructions">
+                    <h3>Как играть:</h3>
+                    <p>Каждую секунду открывается случайная карточка:</p>
+                    <ul>
+                        <li>☀️ Солнышко: +10 очков</li>
+                        <li>☁️ Тучка: -5 очков</li>
+                    </ul>
+                    <p>Цель: набрать 100 очков как можно быстрее!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно результатов -->
+    <div class="modal" id="resultsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🎉 Поздравляем!</h2>
+                <button class="close-btn" id="closeResults">&times;</button>
+            </div>
+            <div class="results-content">
+                <div class="result-icon">🏆</div>
+                <div class="result-stats">
+                    <p>Вы набрали 100 очков за:</p>
+                    <div class="final-time" id="finalTime">00:00</div>
+</div>
+                <div class="result-actions">
+                    <button class="btn btn-primary" id="playAgain">Играть снова</button>
+                    <button class="btn btn-outline" id="closeAfterWin">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Настройки виджета</h2>
+                <button class="close-btn" id="closeSettings">&times;</button>
+            </div>
+            <form id="settingsForm">
+                <input type="hidden" id="editingWidgetId">
+                <div class="form-group">
+                    <label class="form-label" for="widgetTitle">Название виджета</label>
+                    <input type="text" class="form-input" id="widgetTitle" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="widgetCity">Город</label>
+                    <input type="text" class="form-input" id="widgetCity" placeholder="Например: Moscow, London, Paris..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="widgetUnits">Единицы измерения</label>
+                    <select class="form-select" id="widgetUnits">
+                        <option value="metric">Метрические (°C, м/с)</option>
+                        <option value="imperial">Имперские (°F, мили/ч)</option>
+                        <option value="standard">Стандартные (K, м/с)</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelSettings">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Скрытый input для импорта -->
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+
+    <script src="index.js"></script>
+</body>
+</html>
